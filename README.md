@@ -1,111 +1,74 @@
-kitchensink: Assortment of technologies including Arquillian
-========================
-Author: Pete Muir  
-Level: Intermediate  
-Technologies: CDI, JSF, JPA, EJB, JPA, JAX-RS, BV  
-Summary: An example that incorporates multiple technologies  
-Target Product: EAP  
-Product Versions: EAP 6.1, EAP 6.2, EAP 6.3  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts/>  
+RHETCLM
+========
+Red Hat Employee Time-based Check-in Location Manager
+--------
 
-What is it?
------------
-
-This is your project! It is a sample, deployable Maven 3 project to help you get your foot in the door developing with Java EE 6 on Red Hat JBoss Enterprise Application Platform. 
-
-This project is setup to allow you to create a compliant Java EE 6 application using JSF 2.0, CDI 1.0, EJB 3.1, JPA 2.0 and Bean Validation 1.0. It includes a persistence unit and some sample persistence and transaction code to introduce you to database access in enterprise Java. 
-
-There is a tutorial for this quickstart in the [Getting Started Developing Applications Guide](http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/guide/KitchensinkQuickstart/).
-
-System requirements
--------------------
-
-The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 6.1 or later. 
-
-All you need to build this project is Java 6.0 (Java SDK 1.6) or later, Maven 3.0 or later.
-
-_Note: This quickstart uses the H2 database included with JBoss EAP 6. It is a lightweight, relational example datasource that is used for examples only. It is not robust or scalable and should NOT be used in a production environment!_
- 
-Configure Maven
----------------
-
-If you have not yet done so, you must [Configure Maven](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN.md#configure-maven-to-build-and-deploy-the-quickstarts) before testing the quickstarts.
+*Reticulum*: 
+    A small, faint constellation. Its name is Latin for reticle: an optical device used as **an aid in locating objects**.
 
 
-Start the JBoss EAP Server
--------------------------
-
-1. Open a command prompt and navigate to the root of the JBoss EAP directory.
-2. The following shows the command line to start the server:
-
-        For Linux:   EAP_HOME/bin/standalone.sh
-        For Windows: EAP_HOME\bin\standalone.bat
-
- 
-Build and Deploy the Quickstart
--------------------------
-
-_NOTE: The following build command assumes you have configured your Maven user settings. If you have not, you must include Maven setting arguments on the command line. See [Build and Deploy the Quickstarts](../README.md#build-and-deploy-the-quickstarts) for complete instructions and additional options._
-
-1. Make sure you have started the JBoss EAP server as described above.
-2. Open a command prompt and navigate to the root directory of this quickstart.
-3. Type this command to build and deploy the archive:
-
-        mvn clean install jboss-as:deploy
-
-4. This will deploy `target/jboss-kitchensink.war` to the running instance of the server.
- 
-
-Access the application 
----------------------
-
-The application will be running at the following URL: <http://localhost:8080/jboss-kitchensink/>.
+When many coworkers do not physically visit their office every day (e.g. they are at a client location or working from home), it becomes difficult to know who is actually in the office and when. RHETCLM is designed to handle exactly this situation by allowing users to check in to an office. Other users can then check to see who is currently in the office. The system keeps track of when users go in as well as when they leave, so this can be used to get various statistics. For example, the average number of unique users that visit an office per week.
 
 
-Server Log: Expected warnings and errors
------------------------------------
+Technologies Used
+-----------------
 
-_Note:_ You will see the following warnings and errors in the server log. Hibernate attempts to drop the table and constraints before they are created because the `hibernate.hbm2ddl.auto` value is set to `create-drop`. You can ignore these warnings and errors.
+  * OpenShift 
+  * EAP 6
+  * Maven
+  * git
+  * JPA with PostgreSQL 
+  * EJB 3 
+  * JMS (STOMP?)
+  * JSF 
+  * JAX-RS
+  * CDI using Weld
+  * Arquillian and JUnit
 
-        HHH000431: Unable to determine H2 database version, certain features may not work
+Design Principals and Ideas
+---------------------------
 
-        HHH000389: Unsuccessful: drop sequence hibernate_sequence
-        Sequence "HIBERNATE_SEQUENCE" not found; SQL statement: drop sequence hibernate_sequence [90036-168]
+  * Needs to be easy to check-in in order to promote usage 
+  * Useless if most people don't keep up with it 
+  * Should be as automatic (re: painless) as possible
+  * Locations are created automatically as users check into them
 
+  * URL Structure:
 
-Undeploy the Archive
---------------------
+    - Existing user state change:
 
-1. Make sure you have started the JBoss EAP server as described above.
-2. Open a command prompt and navigate to the root directory of this quickstart.
-3. When you are finished testing, type this command to undeploy the archive:
+        > example.com/rhetclm/v1/{location}/{initials}/{state:in/out}
 
-        mvn jboss-as:undeploy
+    - View user details/create user (if initials not found):
 
+        > example.com/rhetclm/v1/{initials}
 
-Run the Arquillian Tests 
--------------------------
+    - Modify user:
 
-This quickstart provides Arquillian tests. By default, these tests are configured to be skipped as Arquillian tests require the use of a container. 
+        > example.com/rhetclm/v1/{initials}/modify
 
-_NOTE: The following commands assume you have configured your Maven user settings. If you have not, you must include Maven setting arguments on the command line. See [Run the Arquillian Tests](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/RUN_ARQUILLIAN_TESTS.md#run-the-arquillian-tests) for complete instructions and additional options._
+    - View all locations:
 
-1. Make sure you have started the JBoss EAP server as described above.
-2. Open a command prompt and navigate to the root directory of this quickstart.
-3. Type the following command to run the test goal with the following profile activated:
+        > example.com/rhetclm/v1
 
-        mvn clean test -Parq-jbossas-remote 
+    - View location:
 
+        > example.com/rhetclm/v1/{location}
 
-Run the Quickstart in JBoss Developer Studio or Eclipse
--------------------------------------
-You can also start the server and deploy the quickstarts from Eclipse using JBoss tools. For more information, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JDBS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts) 
+    - Modify location:
+    
+        > example.com/rhetclm/v1/{location}/modify
 
+  * Needs to be scalable 
+    - Should be able to easily add additional offices that could all be stored on the same database 
+    - Easily tie in with other service hooks 
+      + E.g. IFTTT: can bring in other triggers for us (e.g. location, SMS) 
 
-Debug the Application
-------------------------------------
-
-If you want to debug the source code or look at the Javadocs of any library in the project, run either of the following commands to pull them into your local repository. The IDE should then detect them.
-
-    mvn dependency:sources
-    mvn dependency:resolve -Dclassifier=javadoc
+  * Use initials as a key to look up previous users (quick sign-in)
+    - Allows for a quick check-in use case
+    - Allows coworkers to easily sign each other in
+    - Still allows for guests / infrequent office-goers
+    - Allows for short URLs
+    - Allows for easier scripting
+    - Need to somehow prevent key collisions 
+    - Initials will be primary key? Probably not, if multiple offices are in the same table.
