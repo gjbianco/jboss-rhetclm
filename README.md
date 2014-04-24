@@ -16,7 +16,6 @@ Technologies Used
   * OpenShift 
   * EAP 6
   * Maven
-  * git
   * JPA with PostgreSQL 
   * EJB 3 
   * JMS (STOMP?)
@@ -56,7 +55,7 @@ Design Principals and Ideas
         > example.com/rhetclm/v1/{location}
 
     - Modify location:
-    
+
         > example.com/rhetclm/v1/{location}/modify
 
   * Needs to be scalable 
