@@ -7,7 +7,7 @@ Red Hat Employee Time-based Check-in Location Manager
     A small, faint constellation. Its name is Latin for reticle: an optical device used as **an aid in locating objects**.
 
 
-When many coworkers do not physically visit their office every day (e.g. they are at a client location or working from home), it becomes difficult to know who is actually in the office and when. RHETCLM is designed to handle exactly this situation by allowing users to check in to an office. Other users can then check to see who is currently in the office. The system keeps track of when users go in as well as when they leave, so this can be used to get various statistics. For example, the average number of unique users that visit an office per week.
+When many coworkers do not physically visit their office every day (e.g. they are at a client location or working from home), it becomes difficult to know who is actually in the office and when. RHETCLM (pronounced: reticulum) is designed to handle exactly this situation by allowing users to check in to an office. Other users can then quickly check who is actually at that office before they decide to go in.
 
 
 Technologies Used
