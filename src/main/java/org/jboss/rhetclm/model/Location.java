@@ -14,15 +14,14 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "locations")
 public class Location implements Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private int id;
 	
 	// Should also be unique!
 	@Size(max = 20)
 	private String city;
-	
-	private static final long serialVersionUID = 1L;
 
 	public Location() {
 		super();

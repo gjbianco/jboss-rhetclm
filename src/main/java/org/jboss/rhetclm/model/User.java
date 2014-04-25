@@ -15,14 +15,15 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="users")
 public class User implements Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private int id;
 	
 	// Should also be unique!
 	@NotNull
-	@Size(max = 5)
-	private String initials;
+	@Size(max = 8)
+	private String username;
 	
 	@NotNull
 	@Size(max = 20)
@@ -35,9 +36,9 @@ public class User implements Serializable {
 	@Size(max = 20)
 	private String nickname;
 	
-	private int location_id;
+	//@NotNull
+	private Location location;
 	private boolean is_in;
-	private static final long serialVersionUID = 1L;
 
 	public User() {
 		super();
@@ -70,19 +71,19 @@ public class User implements Serializable {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}   
-	public String getInitials() {
-		return this.initials;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setInitials(String initials) {
-		this.initials = initials;
+	public void setUsername(String username) {
+		this.username = username;
 	}   
-	public int getLocation_id() {
-		return this.location_id;
+	public Location getLocation() {
+		return this.location;
 	}
 
-	public void setLocation_id(int location_id) {
-		this.location_id = location_id;
+	public void setLocation(Location location) {
+		this.location = location;
 	}   
 	public boolean getIs_in() {
 		return this.is_in;
