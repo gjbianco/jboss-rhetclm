@@ -7,12 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entity implementation class for Entity: User
  *
  */
 @Entity
+@XmlRootElement
 @Table(name="users")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
