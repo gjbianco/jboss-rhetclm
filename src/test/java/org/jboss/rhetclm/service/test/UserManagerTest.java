@@ -11,7 +11,6 @@ import org.jboss.rhetclm.service.UserManager;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,9 +50,7 @@ public class UserManagerTest {
 		user.setUsername("rbs");
 		System.out.println("after initUser");
 	}
-	
-	
-	KIIIILLL MEEEEEEEEE
+
 	
 //	public User findUserByQuery(String username) {
 //		User found = (User) em.createQuery("select * from user where username=" + username)
