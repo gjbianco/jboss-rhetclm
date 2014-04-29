@@ -6,12 +6,11 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.rhetclm.model.Location;
 import org.jboss.rhetclm.model.User;
-import org.jboss.rhetclm.service.LocationManager;
 import org.jboss.rhetclm.service.UserManager;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,34 +21,41 @@ public class UserManagerTest {
 	public static WebArchive createDeployment() {
 		WebArchive war = ShrinkWrap
 				.create(WebArchive.class, "test.war")
-				.addClasses(User.class, Location.class,
-							UserManager.class, LocationManager.class)
+				.addClasses(User.class, UserManager.class,
+							Location.class)
+				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
 				.addAsResource("META-INF/persistence.xml");
+		System.out.println(war.toString(true));
 		return war;
 	}
 	
-	static User user;
+	User user;
 	
 	@Inject
 	UserManager userManager;
 	
 	@Test
 	public void addUserTest() {
-		System.out.println("begin addUserTest");
-		userManager.register(user);
-		Assert.assertNotNull(user.getId());
-	}
-		
-	@BeforeClass
-	public static void initUser() {
-		System.out.println("begin initUser");
-		user = new User();
+		User user = new User();
 		user.setFirstname("Robert");
 		user.setLastname("Smith");
 		user.setNickname("Bob");
 		user.setUsername("rbs");
-		System.out.println("after initUser");
+		
+		userManager.register(user);
+		Assert.assertNotNull(user.getId());
 	}
+		
+//	@Before
+//	public void initUser() {
+//		System.out.println("begin initUser");
+//		user = new User();
+//		user.setFirstname("Robert");
+//		user.setLastname("Smith");
+//		user.setNickname("Bob");
+//		user.setUsername("rbs");
+//		System.out.println("after initUser");
+//	}
 
 	
 //	public User findUserByQuery(String username) {

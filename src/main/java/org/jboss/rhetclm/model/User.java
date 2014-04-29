@@ -7,14 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entity implementation class for Entity: User
  *
  */
 @Entity
-@XmlRootElement
+//@XmlRootElement
 @Table(name="users")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -42,9 +41,9 @@ public class User implements Serializable {
 	private Location location;
 	private boolean is_in;
 
-	public User() {
-		super();
-	}   
+//	public User() {
+//		super();
+//	}   
 	public int getId() {
 		return this.id;
 	}

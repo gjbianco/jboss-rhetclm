@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "locations")
 public class Location implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	@Id
 	private int id;
@@ -23,9 +23,9 @@ public class Location implements Serializable {
 	@Size(max = 20)
 	private String city;
 
-	public Location() {
-		super();
-	}   
+//	public Location() {
+//		super();
+//	}   
 	public int getId() {
 		return this.id;
 	}
