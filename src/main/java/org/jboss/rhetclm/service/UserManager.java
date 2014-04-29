@@ -2,24 +2,20 @@ package org.jboss.rhetclm.service;
 
 import java.util.List;
 
-import javax.inject.Inject;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.rhetclm.model.User;
 
+@Stateless
 public class UserManager {
 	
-//	@Inject
-	@PersistenceContext(unitName = "rhetclm")
+	@PersistenceContext(unitName = "primary")
 	private EntityManager em;
-	
-	@Inject
-	//private Event<User> userEventSrc;
 	
 	public void register(User user) {
 		em.persist(user);
-		//userEventSrc.fire(user);
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -2,6 +2,7 @@ package org.jboss.rhetclm.service;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -9,9 +10,10 @@ import javax.persistence.PersistenceContext;
 
 import org.jboss.rhetclm.model.Location;
 
+@Stateless
 public class LocationManager {
 	
-	@PersistenceContext(unitName = "rhetclm")
+	@PersistenceContext(unitName = "primary")
 	private EntityManager em;
 	
 	@Inject
