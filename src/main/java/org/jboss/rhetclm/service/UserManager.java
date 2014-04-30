@@ -26,4 +26,9 @@ public class UserManager {
 	public List<User> findAllUsers() {
 		return (List<User>) em.createQuery("from User").getResultList();
 	}
+	
+	public void remove(String username) {
+		User u = findUser(username);
+		em.remove(u);
+	}
 }

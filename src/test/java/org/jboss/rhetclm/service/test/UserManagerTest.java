@@ -76,6 +76,14 @@ public class UserManagerTest {
 		Assert.assertEquals(getSampleUser(0).getLastname(), actual.getLastname());
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void removeUserTest() {
+		userManager.remove("jjj");
+		List<User> actual = (List<User>) em.createQuery("from User").getResultList();
+		Assert.assertEquals(1, actual.size());
+	}
+	
 	// SETUP METHODS --------------------------------------------------------------------
 	
 	@Before
