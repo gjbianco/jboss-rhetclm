@@ -13,14 +13,6 @@ public class UserManager {
 	
 	@PersistenceContext(unitName = "primary")
 	EntityManager em;
-	
-	public EntityManager getEm() {
-		return em;
-	}
-
-	public void setEm(EntityManager em) {
-		this.em = em;
-	}
 
 	public void register(User user) {
 		em.persist(user);

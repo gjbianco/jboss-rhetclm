@@ -79,7 +79,6 @@ public class UserManagerTest {
 	private void clearData() throws Exception {
 		utx.begin();
 		em.joinTransaction();
-//		userManager.setEm(em);
 		
 		em.createQuery("delete from User").executeUpdate();
 		
