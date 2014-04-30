@@ -18,6 +18,10 @@ public class UserManager {
 		em.persist(user);
 	}
 	
+	public User findUser(String username) {
+		return (User) em.createQuery("from User where username = :username").setParameter("username", username).getSingleResult();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<User> findAllUsers() {
 		return (List<User>) em.createQuery("from User").getResultList();

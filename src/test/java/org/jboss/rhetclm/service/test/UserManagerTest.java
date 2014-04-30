@@ -1,5 +1,7 @@
 package org.jboss.rhetclm.service.test;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -59,7 +61,19 @@ public class UserManagerTest {
 	
 	@Test
 	public void findAllUsersTest() {
-		userManager.findAllUsers();
+		User expected1 = getSampleUser(0);
+		User expected2 = getSampleUser(1);
+		
+		List<User> actual = userManager.findAllUsers();
+		
+		Assert.assertEquals(expected1.getLastname(), actual.get(0).getLastname());
+		Assert.assertEquals(expected2.getLastname(), actual.get(1).getLastname());
+	}
+	
+	@Test
+	public void findUserTest() {
+		User actual = userManager.findUser("jjj");
+		Assert.assertEquals(getSampleUser(0).getLastname(), actual.getLastname());
 	}
 	
 	// SETUP METHODS --------------------------------------------------------------------
