@@ -12,14 +12,22 @@ import org.jboss.rhetclm.model.User;
 public class UserManager {
 	
 	@PersistenceContext(unitName = "primary")
-	private EntityManager em;
+	EntityManager em;
 	
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
 	public void register(User user) {
 		em.persist(user);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<User> findAllUsers() {
-		return (List<User>) em.createQuery("select * from users;").getResultList();
+		return (List<User>) em.createQuery("select * from users").getResultList();
 	}
 }

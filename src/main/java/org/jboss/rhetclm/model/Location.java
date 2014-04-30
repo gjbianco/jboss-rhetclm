@@ -7,10 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-/**
- * Entity implementation class for Entity: Location
- *
- */
 @Entity
 @Table(name = "locations")
 public class Location implements Serializable {
@@ -23,9 +19,8 @@ public class Location implements Serializable {
 	@Size(max = 20)
 	private String city;
 
-//	public Location() {
-//		super();
-//	}   
+	public Location() {}
+	
 	public int getId() {
 		return this.id;
 	}

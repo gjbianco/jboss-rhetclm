@@ -25,6 +25,8 @@
       <properties>
          <property name="hibernate.hbm2ddl.auto" value="create-drop" />
          <property name="hibernate.show_sql" value="false" />
+         <property name="hibernate.connection.username" value="sa" />
+         <property name="hibernate.connection.password" value="sa" />
       </properties>
    </persistence-unit>
 </persistence>
