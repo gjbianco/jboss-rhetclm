@@ -14,7 +14,7 @@ public class UserManager {
 	@PersistenceContext(unitName = "primary")
 	EntityManager em;
 
-	public void register(User user) {
+	public void add(User user) {
 		em.persist(user);
 	}
 	

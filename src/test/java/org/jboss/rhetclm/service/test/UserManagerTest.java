@@ -53,9 +53,9 @@ public class UserManagerTest {
 	// TEST METHODS ---------------------------------------------------------------------
 	
 	@Test
-	public void registerUserTest() {
+	public void addUserTest() {
 		User u = getSampleUser(2);
-		userManager.register(u);
+		userManager.add(u);
 		Assert.assertNotNull(u.getId());
 	}
 	
