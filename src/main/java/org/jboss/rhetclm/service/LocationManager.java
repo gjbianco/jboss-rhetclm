@@ -16,7 +16,7 @@ public class LocationManager {
 	
 	@SuppressWarnings("unchecked")
 	public List<Location> findAllLocations() {
-		return (List<Location>) em.createQuery("select * from locations").getResultList();
+		return (List<Location>) em.createQuery("select * from Location").getResultList();
 	}
 
 	public void register(Location location) {

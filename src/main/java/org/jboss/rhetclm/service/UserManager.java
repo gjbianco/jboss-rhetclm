@@ -28,6 +28,6 @@ public class UserManager {
 	
 	@SuppressWarnings("unchecked")
 	public List<User> findAllUsers() {
-		return (List<User>) em.createQuery("select * from users").getResultList();
+		return (List<User>) em.createQuery("from User").getResultList();
 	}
 }

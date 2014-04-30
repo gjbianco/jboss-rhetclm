@@ -3,6 +3,7 @@ package org.jboss.rhetclm.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 5L;
 	
 	@Id
+	@GeneratedValue
 	private int id;
 	
 	// Should also be unique!

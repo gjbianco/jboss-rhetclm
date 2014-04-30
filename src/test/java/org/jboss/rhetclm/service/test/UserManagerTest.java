@@ -67,7 +67,7 @@ public class UserManagerTest {
 	@Before
 	public void setup() throws Exception {
 		clearData();
-//		addData();
+		addData();
 		startTransaction();
 	}
 	
@@ -90,10 +90,8 @@ public class UserManagerTest {
 		utx.begin();
 		em.joinTransaction();
 		
-		User u = new User("jjw",    "Johnathan", "White",   "John",    null);
-		
 		em.persist(getSampleUser(0));
-		em.persist(u);
+		em.persist(getSampleUser(1));
 		
 		utx.commit();
 		em.clear();
