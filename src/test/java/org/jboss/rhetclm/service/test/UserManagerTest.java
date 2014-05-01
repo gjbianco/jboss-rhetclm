@@ -53,10 +53,27 @@ public class UserManagerTest {
 	// TEST METHODS ---------------------------------------------------------------------
 	
 	@Test
-	public void addUserTest() {
+	public void addUniqueUserTest() {
+		// get our sample user ("Tom")
 		User u = getSampleUser(2);
-		userManager.add(u);
+		
+		// should return User object if name unique
+		Assert.assertEquals(u, userManager.add(u));
+		
+		// test it was actually persisted
 		Assert.assertNotNull(u.getId());
+	}
+	
+	@Test
+	public void addNonUniqueUserTest() {
+		// get our sample user ("Tom")
+		User u = getSampleUser(2);
+		
+		// change his username to an already persisted username ("jjj")
+		u.setUsername("jjj");
+		
+		// should return null if username isn't unique
+		Assert.assertEquals(null, userManager.add(u));
 	}
 	
 	@Test
