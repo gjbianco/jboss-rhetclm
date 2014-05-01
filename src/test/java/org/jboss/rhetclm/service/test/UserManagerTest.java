@@ -1,5 +1,8 @@
 package org.jboss.rhetclm.service.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,7 +21,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,26 +56,24 @@ public class UserManagerTest {
 	
 	@Test
 	public void addUniqueUserTest() {
-		// get our sample user ("Tom")
 		User u = getSampleUser(2);
 		
-		// should return User object if name unique
-		Assert.assertEquals(u, userManager.add(u));
-		
-		// test it was actually persisted
-		Assert.assertNotNull(u.getId());
+		// test add() returned user it was actually persisted
+		assertNotEquals(0, userManager.add(u).getId());
 	}
 	
 	@Test
 	public void addNonUniqueUserTest() {
-		// get our sample user ("Tom")
 		User u = getSampleUser(2);
 		
 		// change his username to an already persisted username ("jjj")
 		u.setUsername("jjj");
 		
 		// should return null if username isn't unique
-		Assert.assertEquals(null, userManager.add(u));
+		assertEquals(null, userManager.add(u));
+		
+		// should not have persisted (and, therefore, ID is 0)
+		assertEquals(0, u.getId());
 	}
 	
 	@Test
@@ -83,14 +83,15 @@ public class UserManagerTest {
 		
 		List<User> actual = userManager.findAllUsers();
 		
-		Assert.assertEquals(expected1.getLastname(), actual.get(0).getLastname());
-		Assert.assertEquals(expected2.getLastname(), actual.get(1).getLastname());
+		// make sure both of our users are found
+		assertEquals(expected1.getLastname(), actual.get(0).getLastname());
+		assertEquals(expected2.getLastname(), actual.get(1).getLastname());
 	}
 	
 	@Test
 	public void findUserTest() {
 		User actual = userManager.findUser("jjj");
-		Assert.assertEquals(getSampleUser(0).getLastname(), actual.getLastname());
+		assertEquals(getSampleUser(0).getLastname(), actual.getLastname());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -98,7 +99,7 @@ public class UserManagerTest {
 	public void removeUserTest() {
 		userManager.remove("jjj");
 		List<User> actual = (List<User>) em.createQuery("from User").getResultList();
-		Assert.assertEquals(1, actual.size());
+		assertEquals(1, actual.size());
 	}
 	
 	// SETUP METHODS --------------------------------------------------------------------
@@ -106,7 +107,7 @@ public class UserManagerTest {
 	@Before
 	public void setup() throws Exception {
 		clearData();
-		addData();
+		addSampleData();
 		startTransaction();
 	}
 	
@@ -124,7 +125,7 @@ public class UserManagerTest {
 		utx.commit();
 	}
 	
-	private void addData() throws Exception {
+	private void addSampleData() throws Exception {
 		utx.begin();
 		em.joinTransaction();
 		
@@ -162,5 +163,5 @@ public class UserManagerTest {
 		System.out.println(war.toString(true));
 		return war;
 	}
-		
+	
 }

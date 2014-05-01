@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.rhetclm.model.User;
@@ -20,21 +21,27 @@ public class UserManager {
 	 * @return Returns the User object back if username is unique; null otherwise.
 	 */
 	public User add(User user) {
-		if(user.getUsername().equals(findUser(user.getUsername())))
+		if(findUser(user.getUsername()) == null) {
+			em.persist(user);
+			return user;
+		} else {
 			// should invalidate input (eventually)
 			return null;
-		else
-			em.persist(user);
-		return user;
+		}
 	}
 	
 	/**
 	 * Query for a user with the provided username (usernames are unique).
 	 * @param username
-	 * @return
+	 * @return If found, returns the User object, and null, if not.
 	 */
 	public User findUser(String username) {
-		return (User) em.createQuery("from User where username = :username").setParameter("username", username).getSingleResult();
+		try {
+			return (User) em.createQuery("from User where username = :username")
+							.setParameter("username", username).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 	
 	/**

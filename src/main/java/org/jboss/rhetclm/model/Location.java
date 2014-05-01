@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "locations")
+@Table(name="locations")
 public class Location implements Serializable {
 	private static final long serialVersionUID = 2L;
 	
@@ -22,6 +22,10 @@ public class Location implements Serializable {
 	private String city;
 
 	public Location() {}
+	
+	public Location(String city) {
+		this.city = city;
+	}
 	
 	public int getId() {
 		return this.id;
@@ -38,4 +42,9 @@ public class Location implements Serializable {
 		this.city = city;
 	}
    
+	@Override
+	public String toString() {
+		return city;
+	}
+	
 }
