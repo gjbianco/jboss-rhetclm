@@ -81,7 +81,7 @@ public class UserManagerTest {
 		User expected1 = getSampleUser(0);
 		User expected2 = getSampleUser(1);
 		
-		List<User> actual = userManager.findAllUsers();
+		List<User> actual = userManager.findAll();
 		
 		// make sure we get the correct number of results
 		assertEquals(2, actual.size());
@@ -93,7 +93,7 @@ public class UserManagerTest {
 	
 	@Test
 	public void findUserTest() {
-		User actual = userManager.findUser("jjj");
+		User actual = userManager.find("jjj");
 		assertEquals(getSampleUser(0).getLastname(), actual.getLastname());
 	}
 	

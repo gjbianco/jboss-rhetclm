@@ -21,7 +21,7 @@ public class UserManager {
 	 * @return Returns the User object back if username is unique; null otherwise.
 	 */
 	public User add(User user) {
-		if(findUser(user.getUsername()) == null) {
+		if(find(user.getUsername()) == null) {
 			em.persist(user);
 			return user;
 		} else {
@@ -35,7 +35,7 @@ public class UserManager {
 	 * @param username
 	 * @return If found, returns the User object, and null, if not.
 	 */
-	public User findUser(String username) {
+	public User find(String username) {
 		try {
 			return (User) em.createQuery("from User where username = :username")
 							.setParameter("username", username).getSingleResult();
@@ -49,7 +49,7 @@ public class UserManager {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<User> findAllUsers() {
+	public List<User> findAll() {
 		return (List<User>) em.createQuery("from User").getResultList();
 	}
 	
@@ -58,7 +58,7 @@ public class UserManager {
 	 * @param username
 	 */
 	public void remove(String username) {
-		User u = findUser(username);
+		User u = find(username);
 		em.remove(u);
 	}
 }
