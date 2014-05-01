@@ -83,6 +83,9 @@ public class UserManagerTest {
 		
 		List<User> actual = userManager.findAllUsers();
 		
+		// make sure we get the correct number of results
+		assertEquals(2, actual.size());
+		
 		// make sure both of our users are found
 		assertEquals(expected1.getLastname(), actual.get(0).getLastname());
 		assertEquals(expected2.getLastname(), actual.get(1).getLastname());

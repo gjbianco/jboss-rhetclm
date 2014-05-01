@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -72,6 +74,26 @@ public class LocationManagerTest {
 	@Test
 	public void findLocationTest() {
 		assertEquals("Charlotte", locationManager.find("Charlotte").getCity());
+	}
+	
+	@Test
+	public void findAllLocationsTest() {
+		List<Location> actual = locationManager.findAllLocations();
+		
+		// make sure we get the correct number of results
+		assertEquals(2, actual.size());
+		
+		// make sure both locations are found
+		assertEquals("Charlotte", actual.get(0).getCity());
+		assertEquals("Raleigh", actual.get(1).getCity());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void removeLocationTest() {
+		locationManager.remove("Charlotte");
+		List<Location> actual = (List<Location>) em.createQuery("from Location").getResultList();
+		assertEquals(1, actual.size());
 	}
 
 	// HELPER METHODS ---------------------------------------------------------
