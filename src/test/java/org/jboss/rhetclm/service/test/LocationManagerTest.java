@@ -92,7 +92,7 @@ public class LocationManagerTest {
 		utx.begin();
 		em.joinTransaction();
 		
-		em.createQuery("delete from Location");
+		em.createQuery("delete from Location").executeUpdate();
 		
 		utx.commit();
 	}
