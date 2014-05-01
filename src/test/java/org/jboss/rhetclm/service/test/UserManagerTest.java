@@ -32,15 +32,15 @@ public class UserManagerTest {
 			// used in initial data setup (DO NOT PERSIST WITHIN TESTS)
 			
 			//                        USERNAME, FIRSTNAME,   LASTNAME,  NICKNAME,  LOCATION
-			new User("jjj",    "James",     "Jones",   "Jim",     null),
-			new User("rbs",    "Robert",    "Smith",   "Bob",     null),
+			new User("jjj",    "James",     "Jones",   "Jim",     new Location("Charlotte")),
+			new User("rbs",    "Robert",    "Smith",   "Bob",     new Location("Raleigh")),
 			
 			
 			// extra users (starts at index = 2)
 			
 			//                        INITIALS, FIRSTNAME,   LASTNAME,  NICKNAME,  LOCATION
-			new User("ttf",    "Tom",       "Fitz",    "Tom",     null),
-			new User("jjw",    "Johnathan", "White",   "John",    null),
+			new User("ttf",    "Tom",       "Fitz",    "Tom",     new Location("Durham")),
+			new User("jjw",    "Johnathan", "White",   "John",    new Location("Chapel Hill")),
 	};
 	
 	@Inject
@@ -150,7 +150,7 @@ public class UserManagerTest {
 		u.setFirstname(sampleUsers[index].getFirstname());
 		u.setLastname(sampleUsers[index].getLastname());
 		u.setNickname(sampleUsers[index].getNickname());
-		u.setLocation(null);
+		u.setLocation(sampleUsers[index].getLocation());
 		return u;
 	}
 	

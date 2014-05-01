@@ -36,7 +36,7 @@ public class User implements Serializable {
 	@Size(max = 20)
 	private String nickname;
 	
-	//@NotNull
+	@NotNull
 	private Location location;
 	private boolean is_in;
 
