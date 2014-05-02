@@ -2,14 +2,14 @@ package org.jboss.rhetclm.controller;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
+import javax.enterprise.inject.Model;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.rhetclm.model.Location;
 
-@Stateless
+@Model
 public class LocationManager {
 	
 	@PersistenceContext(unitName = "primary")
