@@ -24,50 +24,29 @@ Technologies Used
   * CDI using Weld
   * Arquillian and JUnit
 
-Design Principals and Ideas
----------------------------
+Interface
+---------
 
-  * Needs to be easy to check-in in order to promote usage 
-  * Useless if most people don't keep up with it 
-  * Should be as automatic (re: painless) as possible
-  * Locations are created automatically as users check into them
+Existing user state change:
 
-  * URL Structure:
+    /rhetclm/{version}/user/{username}/{in:out}
 
-    - Existing user state change:
+Create user:
 
-        > example.com/rhetclm/v1/{location}/{initials}/{state:in/out}
+    /rhetclm/{version}/user/create
+    
+View user:
+    
+    /rhetclm/{version}/user/{username}
 
-    - View user details/create user (if initials not found):
+Modify user:
 
-        > example.com/rhetclm/v1/{initials}
+    /rhetclm/{version}/user/{initials}/modify
 
-    - Modify user:
+View all locations:
 
-        > example.com/rhetclm/v1/{initials}/modify
+    /rhetclm/{version}/
 
-    - View all locations:
+View location:
 
-        > example.com/rhetclm/v1
-
-    - View location:
-
-        > example.com/rhetclm/v1/{location}
-
-    - Modify location:
-
-        > example.com/rhetclm/v1/{location}/modify
-
-  * Needs to be scalable 
-    - Should be able to easily add additional offices that could all be stored on the same database 
-    - Easily tie in with other service hooks 
-      + E.g. IFTTT: can bring in other triggers for us (e.g. location, SMS) 
-
-  * Use initials as a key to look up previous users (quick sign-in)
-    - Allows for a quick check-in use case
-    - Allows coworkers to easily sign each other in
-    - Still allows for guests / infrequent office-goers
-    - Allows for short URLs
-    - Allows for easier scripting
-    - Need to somehow prevent key collisions 
-    - Initials will be primary key? Probably not, if multiple offices are in the same table.
+    /rhetclm/{version}/location/{location}
