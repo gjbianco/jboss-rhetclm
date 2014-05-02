@@ -13,7 +13,7 @@ import org.jboss.rhetclm.model.User;
 public class UserManager {
 	
 	@PersistenceContext(unitName = "primary")
-	EntityManager em;
+	private EntityManager em;
 
 	/**
 	 * Add the User to the underlying datasource. The User must have a unique username.
