@@ -1,4 +1,4 @@
-package org.jboss.rhetclm.service;
+package org.jboss.rhetclm.controller;
 
 import java.util.List;
 

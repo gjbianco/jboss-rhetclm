@@ -1,4 +1,4 @@
-package org.jboss.rhetclm.service.test;
+package org.jboss.rhetclm.controller.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -13,10 +13,10 @@ import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.rhetclm.controller.LocationManager;
+import org.jboss.rhetclm.controller.UserManager;
 import org.jboss.rhetclm.model.Location;
 import org.jboss.rhetclm.model.User;
-import org.jboss.rhetclm.service.LocationManager;
-import org.jboss.rhetclm.service.UserManager;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
