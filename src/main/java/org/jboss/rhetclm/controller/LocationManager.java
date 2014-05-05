@@ -2,14 +2,16 @@ package org.jboss.rhetclm.controller;
 
 import java.util.List;
 
-import javax.enterprise.inject.Model;
+import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.rhetclm.model.Location;
 
-@Model
+@Named
+@Stateless
 public class LocationManager {
 	
 	@PersistenceContext(unitName = "primary")
@@ -23,9 +25,17 @@ public class LocationManager {
 			return null;
 		}
 	}
+	
+	public Location addCity(String cityName) {
+		return add(new Location(cityName));
+	}
 		
 	@SuppressWarnings("unchecked")
-	public List<Location> findAllLocations() {
+	public List<Location> findAll() {
+//		List<Location> l = (List<Location>) em.createQuery("from Location").getResultList();
+//		if(l.size() == 0)
+//			return null;
+//		return l;
 		return (List<Location>) em.createQuery("from Location").getResultList();
 	}
 	

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/WEB-INF/templates/base.xhtml"> 
+      
+   	<ui:define name="title">Register New User</ui:define>
+
+	<ui:define name="content">
+		<h1>User Registration</h1>
+		<h:form id="reg">
+			<h2>User Registration</h2>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="username" value="Username:" />
+				<h:inputText id="username" value="#{user.username}" />
+				<h:message for="username" errorClass="invalid"/>
+				
+				<h:outputLabel for="firstname" value="First name:" />
+				<h:inputText id="firstname" value="#{user.firstname}" />
+				<h:message for="firstname" errorClass="invalid" />
+				
+				<h:outputLabel for="lastname" value="Last name:" />
+				<h:inputText id="lastname" value="#{user.lastname}" />
+				<h:message for="lastname" errorClass="invalid" />
+				
+				<h:outputLabel for="user_location" value="Location:" />
+				<h:selectOneMenu id="user_location" value="#{user.location}">
+					<ui:repeat var="location" value="#{locations}">
+						<f:selectItem id="location_#{location.city}"
+							label="#{location.city}" value="#{location.city}" />
+					</ui:repeat>
+				</h:selectOneMenu>
+				<h:message for="user_location" errorClass="invalid" />
+				
+				<h:commandButton id="register"
+					action="#{userController.register}"
+					value="Submit" />
+				<h:messages errorClass="invalid" infoClass="valid"
+					warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+		</h:form>
+		<h:form>
+			<h2>Create Location (DEBUG)</h2>
+			<h:panelGrid columns="2" columnClasses="titleCell">
+				<h:outputLabel for="location_name" value="Location name:" />
+				<h:inputText id="location_name" value="#{location.city}" />
+				
+				<h:commandButton id="register_location"
+					action="#{locationController.register}"
+					value="Submit" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

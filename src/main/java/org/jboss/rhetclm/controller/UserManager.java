@@ -2,14 +2,14 @@ package org.jboss.rhetclm.controller;
 
 import java.util.List;
 
-import javax.enterprise.inject.Model;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.rhetclm.model.User;
 
-@Model
+@Named
 public class UserManager {
 	
 	@PersistenceContext(unitName = "primary")

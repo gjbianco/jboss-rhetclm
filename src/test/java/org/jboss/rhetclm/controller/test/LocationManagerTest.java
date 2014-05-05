@@ -77,8 +77,8 @@ public class LocationManagerTest {
 	}
 	
 	@Test
-	public void findAllLocationsTest() {
-		List<Location> actual = locationManager.findAllLocations();
+	public void findAllTest() {
+		List<Location> actual = locationManager.findAll();
 		
 		// make sure we get the correct number of results
 		assertEquals(2, actual.size());
