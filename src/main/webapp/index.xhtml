@@ -14,9 +14,9 @@
 	<ui:define name="content">
 		#{locationManager.addCity("Charlotte")}
 		#{locationManager.addCity("Raleigh")}
-		<ul>
+		<ul id="locations_list" class="list-group">
 			<ui:repeat var="location" value="#{locationManager.findAll()}">
-				<li>
+				<li class="list-group-item">
 					<a href="#">#{location.getCity()}</a>
 				</li>
 			</ui:repeat>
