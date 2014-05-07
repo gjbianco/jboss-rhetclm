@@ -3,11 +3,13 @@ package org.jboss.rhetclm.controller;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.rhetclm.model.Location;
+import org.jboss.rhetclm.service.LocationRegistration;
 
 @RequestScoped
 public class LocationManager {
@@ -15,9 +17,16 @@ public class LocationManager {
 	@PersistenceContext
 	private EntityManager em;
 	
+	@Inject
+	private LocationRegistration registrationHelper;
+	
 	public Location add(Location location) {
+		// TODO move to validators
+		if(location == null || location.getCity() == null || location.getCity().equals(""))
+			return null;
+			
 		if(find(location.getCity()) == null) {
-			em.persist(location);
+			registrationHelper.register(location);
 			return location;
 		} else {
 			return null;

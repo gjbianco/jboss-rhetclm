@@ -44,7 +44,7 @@
 			<h2>Create Location (DEBUG)</h2>
 			<h:panelGrid columns="2" columnClasses="titleCell">
 				<h:outputLabel for="location_name" value="Location name:" />
-				<h:inputText id="location_name" value="#{location.city}" />
+				<h:inputText id="location_name" value="#{newLocation.city}" />
 				
 				<h:commandButton id="register_location"
 					action="#{locationController.register()}"
