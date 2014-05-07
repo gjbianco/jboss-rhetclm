@@ -2,19 +2,17 @@ package org.jboss.rhetclm.controller;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.inject.Named;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.rhetclm.model.Location;
 
-@Named
-@Stateless
+@RequestScoped
 public class LocationManager {
 	
-	@PersistenceContext(unitName = "primary")
+	@PersistenceContext
 	private EntityManager em;
 	
 	public Location add(Location location) {

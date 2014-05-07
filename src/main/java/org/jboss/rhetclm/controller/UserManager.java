@@ -2,6 +2,7 @@ package org.jboss.rhetclm.controller;
 
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -10,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import org.jboss.rhetclm.model.User;
 
 @Named
+@RequestScoped
 public class UserManager {
 	
 	@PersistenceContext(unitName = "primary")

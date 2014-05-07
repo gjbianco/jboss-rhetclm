@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -18,6 +19,7 @@ public class Location implements Serializable {
 	private int id;
 	
 	// Should also be unique!
+	@NotNull
 	@Size(max = 20)
 	private String city;
 

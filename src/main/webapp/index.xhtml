@@ -12,12 +12,10 @@
 	</ui:define>
 
 	<ui:define name="content">
-		#{locationManager.addCity("Charlotte")}
-		#{locationManager.addCity("Raleigh")}
 		<ul>
-			<ui:repeat var="location" value="#{locationManager.findAll()}">
+			<ui:repeat var="location" value="#{locationController.list()}">
 				<li>
-					<a href="#">#{location.getCity()}</a>
+					<a href="#">#{location.city}</a>
 				</li>
 			</ui:repeat>
 		</ul>

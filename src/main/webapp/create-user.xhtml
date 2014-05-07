@@ -6,11 +6,11 @@
       template="/WEB-INF/templates/base.xhtml"> 
       
    	<ui:define name="title">Register New User</ui:define>
+   	
+   	<ui:define name="header">Register New User</ui:define>
 
 	<ui:define name="content">
-		<h1>User Registration</h1>
 		<h:form id="reg">
-			<h2>User Registration</h2>
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="username" value="Username:" />
 				<h:inputText id="username" value="#{user.username}" />
@@ -26,15 +26,15 @@
 				
 				<h:outputLabel for="user_location" value="Location:" />
 				<h:selectOneMenu id="user_location" value="#{user.location}">
-					<ui:repeat var="location" value="#{locations}">
-						<f:selectItem id="location_#{location.city}"
-							label="#{location.city}" value="#{location.city}" />
+					<ui:repeat var="sel_location" value="#{locationController.list()}">
+						<f:selectItem id="location_#{sel_location.city}"
+							itemLabel="#{sel_location.city}" itemValue="#{sel_location.city}" />
 					</ui:repeat>
 				</h:selectOneMenu>
 				<h:message for="user_location" errorClass="invalid" />
 				
 				<h:commandButton id="register"
-					action="#{userController.register}"
+					action="#{userController.register(user)}"
 					value="Submit" />
 				<h:messages errorClass="invalid" infoClass="valid"
 					warnClass="warning" globalOnly="true" />
@@ -47,7 +47,7 @@
 				<h:inputText id="location_name" value="#{location.city}" />
 				
 				<h:commandButton id="register_location"
-					action="#{locationController.register}"
+					action="#{locationController.register()}"
 					value="Submit" />
 			</h:panelGrid>
 		</h:form>
