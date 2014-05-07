@@ -4,17 +4,17 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.jboss.rhetclm.model.Location;
+import org.jboss.rhetclm.model.User;
 
 @Stateless
-public class LocationRegistration {
+public class UserRegistration {
 	
 	@PersistenceContext
 	private EntityManager em;
 	
-	public Location register(Location location) {
-		em.persist(location);
+	public User register(User user) {
+		em.persist(user);
 		em.flush();
-		return location;
+		return user;
 	}
 }

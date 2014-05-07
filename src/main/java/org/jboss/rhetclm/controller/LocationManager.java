@@ -21,10 +21,8 @@ public class LocationManager {
 	private LocationRegistration registrationHelper;
 	
 	public Location add(Location location) {
-		// TODO move to validators
-		if(location == null || location.getCity() == null || location.getCity().equals(""))
-			return null;
-			
+//		if(location == null || location.getCity() == null || location.getCity().equals(""))
+//			return null;
 		if(find(location.getCity()) == null) {
 			registrationHelper.register(location);
 			return location;

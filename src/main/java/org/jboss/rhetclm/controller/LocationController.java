@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,7 +23,7 @@ public class LocationController {
 	
 	@Produces
 	@Named
-	private static Location newLocation;
+	private Location newLocation;
 	
 	@PostConstruct
 	private void initNewLocation() {
@@ -30,6 +31,14 @@ public class LocationController {
 	}
 	
 	public void register() {
+		try{
+			locationManager.add(newLocation);
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Location registered!", "Location registration successful.");
+			fc.addMessage("register_location", m);
+		} catch (Exception e) {
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Location registration failed.", "Registering the location failed.");
+			fc.addMessage("register_location", m);
+		}
 		if(locationManager.add(newLocation) == null) {
 			// TODO add Faces message saying that registration failed
 		}

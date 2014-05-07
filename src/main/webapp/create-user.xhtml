@@ -13,28 +13,26 @@
 		<h:form id="reg">
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="username" value="Username:" />
-				<h:inputText id="username" value="#{user.username}" />
+				<h:inputText id="username" value="#{newUser.username}" />
 				<h:message for="username" errorClass="invalid"/>
 				
 				<h:outputLabel for="firstname" value="First name:" />
-				<h:inputText id="firstname" value="#{user.firstname}" />
+				<h:inputText id="firstname" value="#{newUser.firstname}" />
 				<h:message for="firstname" errorClass="invalid" />
 				
 				<h:outputLabel for="lastname" value="Last name:" />
-				<h:inputText id="lastname" value="#{user.lastname}" />
+				<h:inputText id="lastname" value="#{newUser.lastname}" />
 				<h:message for="lastname" errorClass="invalid" />
 				
 				<h:outputLabel for="user_location" value="Location:" />
-				<h:selectOneMenu id="user_location" value="#{user.location}">
-					<ui:repeat var="sel_location" value="#{locationController.list()}">
-						<f:selectItem id="location_#{sel_location.city}"
-							itemLabel="#{sel_location.city}" itemValue="#{sel_location.city}" />
-					</ui:repeat>
+				<h:selectOneMenu id="user_location" value="#{userLocation}">
+					<f:selectItems value="#{locationController.list()}" var="selLocation"
+							itemLabel="#{selLocation.city}" itemValue="#{selLocation.city}" />
 				</h:selectOneMenu>
 				<h:message for="user_location" errorClass="invalid" />
 				
 				<h:commandButton id="register"
-					action="#{userController.register(user)}"
+					action="#{userController.register}"
 					value="Submit" />
 				<h:messages errorClass="invalid" infoClass="valid"
 					warnClass="warning" globalOnly="true" />
@@ -47,8 +45,9 @@
 				<h:inputText id="location_name" value="#{newLocation.city}" />
 				
 				<h:commandButton id="register_location"
-					action="#{locationController.register()}"
+					action="#{locationController.register}"
 					value="Submit" />
+				<h:message for="register_location" errorClass="invalid"/>
 			</h:panelGrid>
 		</h:form>
 	</ui:define>
