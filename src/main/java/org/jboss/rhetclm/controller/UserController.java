@@ -28,9 +28,10 @@ public class UserController {
 	@Named
 	private User newUser;
 	
-	@Produces
-	@Named
+	// not pretty, but it works
 	private String userLocation;
+	public String getUserLocation() { return this.userLocation; }
+	public void setUserLocation(String userLocation) { this.userLocation = userLocation; }
 	
 	@PostConstruct
 	private void initNew() {
@@ -41,16 +42,18 @@ public class UserController {
 	public void register() {
 		try {
 			System.out.println("DEBUG: user location: " + userLocation);
-			Location found = locationManager.find(userLocation);
-			if(found == null) {
+			// if we have the location, use it (so listing all users at a location works)
+			Location newLocation = locationManager.find(userLocation);
+			if(newLocation == null) {
 				System.out.println("DEBUG: did not find location");
-			} else {
+				// if we don't have this location, add it
+				newLocation = locationManager.addCity(userLocation);
+			}
 //				newUser.setLocation(locationManager.find(userLocation));
-				newUser.setLocation(found);
+				newUser.setLocation(newLocation);
 				userManager.add(newUser);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "User registered!", "User was successfully registered.");
 				fc.addMessage(null, m);
-			}
 		} catch (Exception e) {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "User registration failed.", "Registering the user failed.");
 			fc.addMessage(null, m);

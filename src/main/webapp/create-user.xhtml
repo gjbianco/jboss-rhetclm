@@ -10,7 +10,7 @@
    	<ui:define name="header">Register New User</ui:define>
 
 	<ui:define name="content">
-		<h:form id="reg">
+		<h:form id="user_registration">
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="username" value="Username:" />
 				<h:inputText id="username" value="#{newUser.username}" />
@@ -25,12 +25,12 @@
 				<h:message for="lastname" errorClass="invalid" />
 				
 				<h:outputLabel for="user_location" value="Location:" />
-				<h:selectOneMenu id="user_location" value="#{userLocation}">
-					<f:selectItems value="#{locationController.list()}" var="selLocation"
-							itemLabel="#{selLocation.city}" itemValue="#{selLocation.city}" />
+				<h:selectOneMenu id="user_location" value="#{userController.userLocation}">
+				<f:selectItems value="#{locationController.list()}" var="selLocation"
+					itemLabel="#{selLocation.city}" itemValue="#{selLocation.city}" />
 				</h:selectOneMenu>
 				<h:message for="user_location" errorClass="invalid" />
-				
+								
 				<h:commandButton id="register"
 					action="#{userController.register}"
 					value="Submit" />
@@ -38,7 +38,7 @@
 					warnClass="warning" globalOnly="true" />
 			</h:panelGrid>
 		</h:form>
-		<h:form>
+		<h:form id="location_registration">
 			<h2>Create Location (DEBUG)</h2>
 			<h:panelGrid columns="2" columnClasses="titleCell">
 				<h:outputLabel for="location_name" value="Location name:" />
@@ -52,3 +52,5 @@
 		</h:form>
 	</ui:define>
 </ui:composition>
+
+<!-- 				<h:inputText id="user_location" value="#{userController.userLocation}" /> -->
