@@ -2,25 +2,21 @@ package org.jboss.rhetclm.controller;
 
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.rhetclm.model.User;
-import org.jboss.rhetclm.service.UserRegistration;
 
-@Named
-@RequestScoped
+@Stateless
 public class UserManager {
 	
 	@PersistenceContext(unitName = "primary")
 	private EntityManager em;
 	
-	@Inject
-	private UserRegistration registrationHelper;
+//	@Inject
+//	private UserRegistration registrationHelper;
 
 	/**
 	 * Add the User to the underlying datasource. The User must have a unique username.
@@ -28,8 +24,10 @@ public class UserManager {
 	 * @return Returns the User object back if username is unique; null otherwise.
 	 */
 	public User add(User user) {
-		if(user != null && find(user.getUsername()) == null) {
-			registrationHelper.register(user);
+		if(find(user.getUsername()) == null) {
+//			registrationHelper.register(user);
+			em.persist(user);
+			em.flush();
 			return user;
 		} else {
 			// TODO should invalidate input (eventually)

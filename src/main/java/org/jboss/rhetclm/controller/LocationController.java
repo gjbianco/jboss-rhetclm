@@ -39,9 +39,9 @@ public class LocationController {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Location registration failed.", "Registering the location failed.");
 			fc.addMessage("register_location", m);
 		}
-		if(locationManager.add(newLocation) == null) {
-			// TODO add Faces message saying that registration failed
-		}
+//		if(locationManager.add(newLocation) == null) {
+//			// TODO add Faces message saying that registration failed
+//		}
 		initNewLocation();
 	}
 	

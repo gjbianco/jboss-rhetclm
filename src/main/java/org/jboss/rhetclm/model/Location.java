@@ -6,8 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="locations")
@@ -19,7 +20,7 @@ public class Location implements Serializable {
 	private int id;
 	
 	// Should also be unique!
-	@NotNull
+	@NotEmpty
 	@Size(max = 20)
 	private String city;
 

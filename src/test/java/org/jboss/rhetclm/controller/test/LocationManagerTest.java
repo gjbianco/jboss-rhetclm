@@ -52,15 +52,15 @@ public class LocationManagerTest {
 	// TEST METHODS -----------------------------------------------------------
 	
 	@Test
-	public void addUniqueLocationTest() {
+	public void addUniqueLocationTest() throws Exception {
 		Location l = getSampleLocation(2);
 		
 		// make sure location is returned and was persisted
 		assertNotEquals(0, locationManager.add(l).getId());
 	}
 	
-	@Test
-	public void addNonUniqueLocationTest() {
+	@Test(expected = Exception.class)
+	public void addNonUniqueLocationTest() throws Exception {
 		Location l = getSampleLocation(2);
 		l.setCity("Charlotte");
 		
@@ -102,12 +102,6 @@ public class LocationManagerTest {
 	public void setup() throws Exception {
 		clearData();
 		addSampleLocations();
-		beginTransaction();
-	}
-	
-	@After
-	public void commitTransaction() throws Exception {
-		utx.commit();
 	}
 	
 	private void clearData() throws Exception {
@@ -128,11 +122,6 @@ public class LocationManagerTest {
 		
 		utx.commit();
 		em.clear();
-	}
-	
-	private void beginTransaction() throws Exception {
-		utx.begin();
-		em.joinTransaction();
 	}
 	
 	private Location getSampleLocation(int index) {

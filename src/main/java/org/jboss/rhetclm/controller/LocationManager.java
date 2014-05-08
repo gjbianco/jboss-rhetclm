@@ -2,36 +2,36 @@ package org.jboss.rhetclm.controller;
 
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.rhetclm.model.Location;
-import org.jboss.rhetclm.service.LocationRegistration;
 
-@RequestScoped
+@Stateless
 public class LocationManager {
 	
 	@PersistenceContext
 	private EntityManager em;
 	
-	@Inject
-	private LocationRegistration registrationHelper;
+//	@Inject
+//	private LocationRegistration registrationHelper;
 	
-	public Location add(Location location) {
+	public Location add(Location location) throws Exception {
 //		if(location == null || location.getCity() == null || location.getCity().equals(""))
 //			return null;
 		if(find(location.getCity()) == null) {
-			registrationHelper.register(location);
+//			registrationHelper.register(location);
+			em.persist(location);
+			em.flush();
 			return location;
 		} else {
-			return null;
+			throw new Exception("Location not unique.");
 		}
 	}
 	
-	public Location addCity(String cityName) {
+	public Location addCity(String cityName) throws Exception {
 		return add(new Location(cityName));
 	}
 		

@@ -20,7 +20,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -111,12 +110,6 @@ public class UserManagerTest {
 	public void setup() throws Exception {
 		clearData();
 		addSampleData();
-		startTransaction();
-	}
-	
-	@After
-	public void commitTransaction() throws Exception {
-		utx.commit();
 	}
 	
 	private void clearData() throws Exception {
@@ -137,11 +130,6 @@ public class UserManagerTest {
 		
 		utx.commit();
 		em.clear();
-	}
-	
-	private void startTransaction() throws Exception {
-		utx.begin();
-		em.joinTransaction();
 	}
 	
 	private User getSampleUser(int index) {

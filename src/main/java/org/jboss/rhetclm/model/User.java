@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @XmlRootElement
 @Table(name="users")
@@ -21,15 +23,15 @@ public class User implements Serializable {
 	private int id;
 	
 	// Should also be unique!
-	@NotNull
+	@NotEmpty
 	@Size(max = 8)
 	private String username;
 	
-	@NotNull
+	@NotEmpty
 	@Size(max = 20)
 	private String firstname;
 	
-	@NotNull
+	@NotEmpty
 	@Size(max = 20)
 	private String lastname;
 	
