@@ -107,6 +107,8 @@ public class User implements Serializable {
 	
 	@Override
 	public String toString() {
+		if(nickname == null || nickname.equals(""))
+			return firstname + " " + lastname + " (" + username + ")";
 		return firstname + " \"" + nickname + "\" " + lastname + " (" + username + ")";
 	}
    
