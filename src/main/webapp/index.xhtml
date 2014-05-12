@@ -15,7 +15,8 @@
 		<ul>
 			<ui:repeat var="location" value="#{locationController.list()}">
 				<li>
-					<a href="#">#{location.city}</a>
+<!-- 					<a href="#">#{location.city}</a> -->
+					<h:link value="#{location.city}" outcome="view-all-users" />
 				</li>
 			</ui:repeat>
 		</ul>
