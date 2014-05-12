@@ -105,6 +105,13 @@ public class User implements Serializable {
 		this.is_in = is_in;
 	}
 	
+	public String inOutText() {
+		if(is_in)
+			return "in";
+		else
+			return "out";
+	}
+	
 	@Override
 	public String toString() {
 		if(nickname == null || nickname.equals(""))

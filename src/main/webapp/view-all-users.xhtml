@@ -12,7 +12,7 @@
 	<ui:define name="content">
 		<ul>
 			<ui:repeat var="user" value="#{userController.list()}">
-				<li>#{user.toString()}</li>
+				<li>#{user.toString()}, #{user.location} (#{user.inOutText()})</li>
 			</ui:repeat>
 		</ul>
 	</ui:define>
