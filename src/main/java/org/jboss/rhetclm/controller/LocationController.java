@@ -11,12 +11,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.rhetclm.model.Location;
+import org.jboss.rhetclm.model.User;
 
 @Model
 public class LocationController {
 	
 	@Inject
 	private LocationManager locationManager;
+	
+	@Inject
+	private UserManager userManager;
 	
 	//@Inject
 	private FacesContext fc = FacesContext.getCurrentInstance();
@@ -25,10 +29,23 @@ public class LocationController {
 	@Named
 	private Location newLocation;
 	
+	private Location foundLocation; // should not be set outside of this class
+	public Location getFoundLocation() { return foundLocation; }
+	
+	private String toFindLocation;
+	public String getToFindLocation() { return this.toFindLocation; }
+	public void setToFindLocation(String toFindLocation) { this.toFindLocation = toFindLocation; }
+	
+	private List<User> usersAtLocation; // should not be set outside of this class
+	public List<User> getusersAtLocation() { return this.usersAtLocation; }
+	
 	@PostConstruct
 	private void initNewLocation() {
 		newLocation = new Location();
 	}
+	
+	// bad way of doing it
+	// (httpservletrequest) facescontext.getcurrentinstance.getexternalcontext.getrequest
 	
 	public void register() {
 		try{
@@ -43,6 +60,18 @@ public class LocationController {
 //			// TODO add Faces message saying that registration failed
 //		}
 		initNewLocation();
+	}
+	
+	/**
+	 * Query for location stored in toFindLocation (assumes this is not null).
+	 * Stores result in foundLocation.
+	 * @return
+	 */
+	public void findLocation() {
+		if(!FacesContext.getCurrentInstance().isPostback() && !FacesContext.getCurrentInstance().isValidationFailed()) {
+			this.foundLocation = locationManager.find(toFindLocation);
+			this.usersAtLocation = userManager.findByLocation(this.foundLocation);
+		}
 	}
 	
 	public List<Location> list() {

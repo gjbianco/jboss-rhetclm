@@ -7,18 +7,20 @@
       
    	<ui:define name="title">Locations</ui:define>
 
-	<ui:define name="header">
-		<h2>Locations</h2>
-	</ui:define>
+	<ui:define name="header">Locations</ui:define>
 
 	<ui:define name="content">
+	
 		<ul>
 			<ui:repeat var="location" value="#{locationController.list()}">
 				<li>
 <!-- 					<a href="#">#{location.city}</a> -->
-					<h:link value="#{location.city}" outcome="view-all-users" />
+					<h:link value="#{location.city}" outcome="view-single-location?location=#{location.city}" />
 				</li>
 			</ui:repeat>
 		</ul>
+		
+		<h:button value="Create New" outcome="create-user" /> 
+		
 	</ui:define>
 </ui:composition>

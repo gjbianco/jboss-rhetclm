@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import org.jboss.rhetclm.model.Location;
 import org.jboss.rhetclm.model.User;
 
 @Stateless
@@ -44,6 +45,21 @@ public class UserManager {
 		try {
 			return (User) em.createQuery("from User where username = :username")
 							.setParameter("username", username).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * Find all Users currently listed as being in the provided location.
+	 * @param location
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<User> findByLocation(Location location) {
+		try {
+			return em.createQuery("from User where location = :location")
+								  .setParameter("location", location).getResultList();
 		} catch (NoResultException e) {
 			return null;
 		}

@@ -34,6 +34,8 @@
 				<h:commandButton id="register"
 					action="#{userController.register}"
 					value="Submit" />
+				<h:button value="Cancel" outcome="index" />
+					
 				<h:messages errorClass="invalid" infoClass="valid"
 					warnClass="warning" globalOnly="true" />
 			</h:panelGrid>
@@ -46,7 +48,7 @@
 				
 				<h:commandButton id="register_location"
 					action="#{locationController.register}"
-					value="Submit" />
+					value="Submit" />				
 				<h:message for="register_location" errorClass="invalid"/>
 			</h:panelGrid>
 		</h:form>
