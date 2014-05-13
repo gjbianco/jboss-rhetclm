@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="WEB-INF/templates/base.xhtml">
+      
+    <head>
+	    <f:metadata>
+    		<f:viewParam name="user" value="#{userController.userToFind}" />
+    		<f:event listener="#{userController.findUser()}" type="preRenderView" />
+    	</f:metadata>
+    </head>
+
+	<ui:define name="title">#{userController.foundUser}</ui:define>
+	
+	<ui:define name="header">#{userController.foundUser}</ui:define>
+	
+	<ui:define name="content">
+	
+		<h:panelGrid columns="2">
+			<h:outputLabel for="user_location" value="Current Location:" />
+			<h:link id="user_location"
+				value="#{userController.foundUser.location}"
+				outcome="view-single-location?location=#{userController.foundUser.location}"/>
+			
+			<h:outputLabel for="in_out_text" value="In/Out:" />
+			<h:outputText id="in_out_text" value="#{userController.foundUser.inOutText()}" />
+			
+		</h:panelGrid>
+			
+			<h:button value="Modify User" outcome="modify-user?user=#{userController.foundUser.username}" />
+		
+	</ui:define>
+
+</ui:composition>

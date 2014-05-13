@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="WEB-INF/templates/base.xhtml">
+      
+    <head>
+    	<f:metadata>
+    		<f:viewParam name="user" value="#{userController.userToFind}" />
+    		<f:event listener="#{userController.findUser()}" type="preRenderView" />
+    	</f:metadata>
+    </head>
+
+	<ui:define name="title">Modify User: #{userController.foundUser}</ui:define>
+	
+	<ui:define name="header">Modify User: #{userController.foundUser}</ui:define>
+	
+	<ui:define name="content">
+		<h:form id="user_registration">
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="username" value="Username:" />
+				<h:inputText id="username" value="#{userController.foundUser.username}" />
+				<h:message for="username" errorClass="invalid"/>
+				
+				<h:outputLabel for="firstname" value="First name:" />
+				<h:inputText id="firstname" value="#{userController.foundUser.firstname}" />
+				<h:message for="firstname" errorClass="invalid" />
+				
+				<h:outputLabel for="lastname" value="Last name:" />
+				<h:inputText id="lastname" value="#{userController.foundUser.lastname}" />
+				<h:message for="lastname" errorClass="invalid" />
+				
+				<h:outputLabel for="user_location" value="Location:" />
+				<h:selectOneMenu id="user_location" value="#{userController.userLocation}">
+				<f:selectItems value="#{locationController.list()}" var="selLocation"
+					itemLabel="#{selLocation.city}" itemValue="#{selLocation.city}" />
+				</h:selectOneMenu>
+				<h:message for="user_location" errorClass="invalid" />
+								
+				<h:commandButton id="register"
+					action="#{userController.register}"
+					value="Submit" />
+				<h:button value="Cancel" outcome="index" />
+					
+				<h:messages errorClass="invalid" infoClass="valid"
+					warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

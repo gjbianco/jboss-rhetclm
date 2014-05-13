@@ -20,7 +20,7 @@
 	<ui:define name="content">
 		<ul>
 			<ui:repeat var="user" value="#{locationController.usersAtLocation}">
-				<li><h:link value="#{user.toString()}" outcome="view-single-user?user=#{user}" /></li>
+				<li><h:link value="#{user.toString()}" outcome="view-single-user?user=#{user.username}" /></li>
 			</ui:repeat>
 		</ul>
 	</ui:define>

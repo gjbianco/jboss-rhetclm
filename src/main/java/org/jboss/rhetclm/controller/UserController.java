@@ -24,6 +24,13 @@ public class UserController {
 	
 	private FacesContext fc = FacesContext.getCurrentInstance();
 	
+	private String userToFind;
+	public String getUserToFind() { return userToFind; }
+	public void setUserToFind(String userToFind) { this.userToFind = userToFind; }
+	
+	private User foundUser; // should not be set outside of this class
+	public User getFoundUser() { return foundUser; }
+	
 	@Produces
 	@Named
 	private User newUser;
@@ -59,6 +66,16 @@ public class UserController {
 			fc.addMessage(null, m);
 		}
 		initNew();
+	}
+	
+	public void updateUser() {
+		
+	}
+	
+	public void findUser() {
+		if(!FacesContext.getCurrentInstance().isPostback() && !FacesContext.getCurrentInstance().isValidationFailed()) {
+			foundUser = userManager.find(userToFind);
+		}
 	}
 	
 	public List<User> list() {
